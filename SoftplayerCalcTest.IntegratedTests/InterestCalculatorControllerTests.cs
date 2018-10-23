@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
@@ -11,11 +12,12 @@ namespace SoftplayerCalcTest.IntegratedTests
   public class InterestCalculatorControllerTests: IClassFixture<WebApplicationFactory<Startup>>
   {
     private WebApplicationFactory<Startup> WebApplicationFactory { get; }
-
+    private HttpClient Client { get; }
 
     public InterestCalculatorControllerTests(WebApplicationFactory<Startup> webApplicationFactory)
     {
       this.WebApplicationFactory = webApplicationFactory;
+      this.Client = this.WebApplicationFactory.CreateClient();
     }
 
     [Theory]
@@ -30,11 +32,10 @@ namespace SoftplayerCalcTest.IntegratedTests
     public async Task Get_Returns_BadRequest_For_Invalid_Input(string presentValue, string periods)
     {
       // Arrange
-      var client = this.WebApplicationFactory.CreateClient();
       var parms = this.GetQueryString(presentValue, periods);
 
       // Act
-      var response = await client.GetAsync("/api/calculajuros" + parms);
+      var response = await this.Client.GetAsync("/api/calculajuros" + parms);
 
       //Assert
       response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -50,11 +51,10 @@ namespace SoftplayerCalcTest.IntegratedTests
     public async Task Get_Returns_Ok_For_Valid_Input(string presentValue, string periods)
     {
       // Arrange
-      var client = this.WebApplicationFactory.CreateClient();
       var parms = this.GetQueryString(presentValue, periods);
 
       // Act
-      var response = await client.GetAsync("/api/calculajuros" + parms);
+      var response = await this.Client.GetAsync("/api/calculajuros" + parms);
 
       //Assert
       response.StatusCode.Should().Be(HttpStatusCode.OK);

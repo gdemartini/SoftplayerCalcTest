@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,21 +11,22 @@ namespace SoftplayerCalcTest.IntegratedTests
   public class ShowMeTheCodeControllerTests : IClassFixture<WebApplicationFactory<Startup>>
   {
     private WebApplicationFactory<Startup> WebApplicationFactory { get; }
+    private HttpClient Client { get; }
 
 
     public ShowMeTheCodeControllerTests(WebApplicationFactory<Startup> webApplicationFactory)
     {
       this.WebApplicationFactory = webApplicationFactory;
+      this.Client = this.WebApplicationFactory.CreateClient();
     }
 
     [Fact]
     public async Task Get_Returns_Ok()
     {
       // Arrange
-      var client = this.WebApplicationFactory.CreateClient();
 
       // Act
-      var response = await client.GetAsync("/api/showmethecode");
+      var response = await this.Client.GetAsync("/api/showmethecode");
 
       //Assert
       response.StatusCode.Should().Be(HttpStatusCode.OK);
