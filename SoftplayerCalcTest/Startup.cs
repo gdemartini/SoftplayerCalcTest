@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SoftplayerCalcTest.Services;
 
 namespace SoftplayerCalcTest
 {
@@ -21,6 +22,9 @@ namespace SoftplayerCalcTest
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
       services.AddSwaggerDocumentation();
+
+      // Adding as singleton, since it's completely stateless
+      services.AddSingleton<IInterestCalculatorService, InterestCalculatorService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
