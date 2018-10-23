@@ -2,7 +2,7 @@ FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /app
 EXPOSE 80
 
-COPY /home/vsts/work/1/a/SoftplayerCalcTest .
+COPY SoftplayerCalcTest/out .
 ENTRYPOINT ["dotnet", "SoftplayerCalcTest.dll"]
 
 
