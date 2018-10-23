@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftplayerCalcTest.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftplayerCalcTest.IntegratedTests", "SoftplayerCalcTest.IntegratedTests\SoftplayerCalcTest.IntegratedTests.csproj", "{C1C81B00-8161-4821-AB3C-448AF7C1770F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D1B37CF2-961B-4ADB-8264-FE696D9D00D4}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
