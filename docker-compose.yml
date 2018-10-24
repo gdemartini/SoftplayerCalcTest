@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  softplayercalctest:
+    image: ${DOCKER_REGISTRY}softplayercalctest
+    build:
+      context: .
+      dockerfile: SoftplayerCalcTest/Dockerfile
